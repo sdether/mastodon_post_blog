@@ -1,0 +1,35 @@
+# Mac OS artifacts
+.DS_Store
+
+# IntelliJ project directory
+.idea
+
+# Emacs artifacts
+*~
+
+# Compiled python modules.
+*.pyc
+
+# Setuptools distribution folder.
+/dist/
+/build/
+
+# Python egg metadata, regenerated from source files by setuptools.
+/*.egg-info
+/*.egg
+.eggs
+.cache
+.pytest_cache
+
+# Logs
+*.log
+
+# Docker local data
+.local_data
+
+prod.env
+.prod-env-set
+.prod-env-unset
+/static/
+
+.python-version

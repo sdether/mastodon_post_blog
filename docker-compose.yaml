@@ -1,0 +1,23 @@
+version: '2'
+
+services:
+  server:
+    image: postblog
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/opt/mastodon-post-blog
+    ports:
+      - 8000:8000
+    environment:
+      - BLOG_POST_PATTERN=${BLOG_POST_PATTERN}
+      - BLOG_POST_POSTFIX=${BLOG_POST_POSTFIX}
+      - BLOG_TITLE_PATTERN=${BLOG_TITLE_PATTERN}
+      - DATABASE_HOST=${DATABASE_HOST}
+      - DATABASE_NAME=${DATABASE_NAME}
+      - DATABASE_PASSWORD=${DATABASE_PASSWORD}
+      - DATABASE_USER=${DATABASE_USER}
+      - MASTODON_HOST=${MASTODON_HOST}
+      - MASTODON_OAUTH_TOKEN=${MASTODON_OAUTH_TOKEN}
+      - MASTODON_USER=${MASTODON_USER}
