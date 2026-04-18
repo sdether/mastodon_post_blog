@@ -90,12 +90,17 @@ def create_toot(url):
     parser = HTMLMetaParser()
     parser.feed(response.text)
     parser.close()
-    title = parser.meta.get('og:title')
-    if title and BLOG_TITLE_RE:
-        m = BLOG_TITLE_RE.match(title)
-        if m:
-            title = m.group('title')
-    description = parser.meta.get('og:description')
+    title = parser.meta.get('mastodon:title')
+    if not title:
+        title = parser.meta.get('og:title') or parser.meta.get('twitter:title')
+        if title and BLOG_TITLE_RE:
+            m = BLOG_TITLE_RE.match(title)
+            if m:
+                title = m.group('title')
+    description = (parser.meta.get('mastodon:description')
+                   or parser.meta.get('og:description')
+                   or parser.meta.get('twitter:description'))
+    tags = parser.meta.get('mastodon:tags')
     status = ""
     if title:
         status = f"{title}\n\n"
@@ -103,6 +108,8 @@ def create_toot(url):
         status += f"{description}\n"
     if BLOG_POST_POSTFIX:
         status += f"{BLOG_POST_POSTFIX}\n"
+    if tags:
+        status += f"{tags}\n"
     status += url
     status_url = f"https://{MASTODON_HOST}/api/v1/statuses"
     response = requests.post(status_url,

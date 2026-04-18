@@ -22,6 +22,24 @@ blog can render a comment thread. Supports three deployment targets from a singl
 | `S3_ENDPOINT`          | Full endpoint URL for S3, e.g. `https://sfo3.digitaloceanspaces.com`. Omit for standard AWS S3.                                                        |
 | `S3_KEY` / `S3_SECRET` | S3 access key pair. Omit on AWS Lambda when using an IAM execution role.                                                                               |
 
+## Mastodon Status Formatting
+
+Mastodon status updates are constructed from this template:
+
+```
+{title}
+
+[{description}]
+[{BLOG_POST_POSTFIX}]
+[{tags}]
+{url}
+```
+
+where:
+- `title` - `mastodon:title` meta header if present, otherwise `og:title` or `twitter:description` processed by `BLOG_TITLE_PATTERN`
+- `description` - `mastodon:description` or `og:description` or `twitter:description`
+- `tags` - `mastodon:tags`. expects a free form string
+
 
 ## S3 / Spaces Storage Setup
 
