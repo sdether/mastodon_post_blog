@@ -1,0 +1,21 @@
+packages:
+  - name: postblog
+    shared: false
+    environment:
+      MASTODON_USER: '${MASTODON_USER}'
+      MASTODON_HOST: '${MASTODON_HOST}'
+      MASTODON_OAUTH_TOKEN: '${MASTODON_OAUTH_TOKEN}'
+      BLOG_POST_PATTERN: '${BLOG_POST_PATTERN}'
+      BLOG_POST_POSTFIX: '${BLOG_POST_POSTFIX}'
+      BLOG_TITLE_PATTERN: '${BLOG_TITLE_PATTERN}'
+      S3_KEY: '${S3_KEY}'
+      S3_SECRET: '${S3_SECRET}'
+      S3_ENDPOINT: '${S3_ENDPOINT}'
+      S3_BUCKET: '${S3_BUCKET}'
+    functions:
+      - name: post
+        runtime: python:3.11
+        web: true
+        limits:
+          timeout: 30000
+          memory: 256

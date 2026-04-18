@@ -33,3 +33,7 @@ prod.env
 /static/
 
 .python-version
+
+.claude
+.deployed
+__deployer__.zip
